@@ -265,9 +265,8 @@ function coolDown(t, f) {
 }
 
 
-function flatSquaresBG(animationLength) {
-    var c = document.getElementById('bg-canvas');
-    var ctx = c.getContext('2d');
+function flatSquaresBG(canvas, animationLength) {
+    var ctx = canvas.getContext('2d');
 
     c.height = window.innerHeight;
     c.width  = window.innerWidth;
@@ -297,13 +296,16 @@ function flatSquaresBG(animationLength) {
 };
 
 
+var c = document.getElementById('bg-canvas');
+
+
 window.onload = 
-document.onclick = 
-document.ontouch = 
+c.onclick = 
+c.ontouch = 
 window.onresize = function () {
     let currentFuncs = [];
     return (e) => {
 	currentFuncs.forEach((id) => window.clearTimeout(id));
-	currentFuncs = flatSquaresBG(500).map((f) => window.setTimeout(f, randInt(1, 500)));
+	currentFuncs = flatSquaresBG(c, 500).map((f) => window.setTimeout(f, randInt(1, 500)));
     };
 }();
