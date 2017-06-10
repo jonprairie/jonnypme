@@ -148,7 +148,7 @@ function leftRightGradient(screenWidth, screenHeight) {
   *   need to generate 'pseudo' triangle numbers. The difference between
   *   each successive pseudo triangle number also increments by one, but
   *   remains constant once we reach an index greater than the smaller of
-  *   the screen width and screen height. The difference then starts to 
+  *   the screen's width and height. The difference then starts to 
   *   decrement once we reach an index greater than the larger of the two. 
   */
 function genTriNumbers(screenWidth, screenHeight) {
@@ -265,7 +265,7 @@ function coolDown(t, f) {
 }
 
 
-var flatSquaresBG = coolDown(500, function (animationLength) {
+function flatSquaresBG(animationLength) {
     var c = document.getElementById('bg');
     var ctx = c.getContext('2d');
 
@@ -277,25 +277,33 @@ var flatSquaresBG = coolDown(500, function (animationLength) {
 	numSquaresTall = Math.floor(c.height / sqrWidth),
 	sqrHeight = Math.ceil(sqrWidth + (c.height % sqrWidth) / numSquaresTall + 1),
 	totalNumSquares = (Math.floor(c.height / sqrHeight) + 1) * numSquaresWide,
-	colorWheelSpread = .4,
+	colorWheelSpread = .5,
 	startColorAngle = Math.random(),
 	saturation = () => randInt(3000, 5000) / 10000,
 	lightness = () => randInt(3000, 7000) / 10000,
-	colors = ((seq) => coinFlip() ? seq : seq.reverse()) (
-		    genHuesFromAngleSpread(totalNumSquares, colorWheelSpread, startColorAngle)
-			.map(x => hslToRgb(x, saturation(), lightness()))
-			.map(rgbArrayToHex)
-		 );
+	colors = genHuesFromAngleSpread(totalNumSquares, colorWheelSpread, startColorAngle)
+	  .map(x => hslToRgb(x, saturation(), lightness()))
+	  .map(rgbArrayToHex);
 
-    swatchDrawer = genColorSwatchDrawer(
+    colors = coinFlip() ? colors.reverse() : colors;
+
+    let swatchDrawer = genColorSwatchDrawer(
 	getRandGradient()(numSquaresWide, numSquaresTall),
 	sqrWidth,
 	sqrHeight
     );
-    colors.forEach((c, i) => setTimeout(() => swatchDrawer(ctx, i, c), randInt(1,animationLength)));
-});
+
+    return colors.map((c, i) => () => swatchDrawer(ctx, i, c));
+};
+
 
 window.onload = 
 document.onclick = 
-document.ontouchstart = 
-window.onresize = (e) => flatSquaresBG(500);
+document.ontouch = 
+window.onresize = function () {
+    let currentFuncs = [];
+    return (e) => {
+	currentFuncs.forEach((id) => window.clearTimeout(id));
+	currentFuncs = flatSquaresBG(500).map((f) => window.setTimeout(f, randInt(1, 500)));
+    };
+}();
