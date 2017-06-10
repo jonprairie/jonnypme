@@ -2,12 +2,33 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>colors</title>
-    <link rel="stylesheet" href="main.css" />
+    <title>Jonathan Prairie</title>
+    <link rel="stylesheet" href="res/styles/main.css" />
   </head>
-  <body>
-    <canvas id="bg" width="500" height="500"></canvas>
-    <script type="text/javascript" language="JavaScript" src="swatch.js"></script>
+  <body class="bg-image">
+    <canvas id="bg-canvas"></canvas>
+    <div class="v-center">
+      <div class="h-center">
+	<div class="h-center content noselect">
+    	  <h1>Jonathan Prairie</h1>
+	  <div>
+	    <label for="github">github:</label>
+	    <a id="github" href="https://www.github.com/jonprairie">jonprairie</a>
+	  </div>
+	  <div>
+	    <label for="lichess">lichess:</label>
+	    <a id="lichess" href="https://lichess.org/@/augustusseizure">augustusseizure</a>
+	  </div>
+	  <div>
+	    <label for="stack">stackoverflow:</label>
+	    <a id="stack" href="https://stackoverflow.com/users/7120997/jonnyp">jonnyp</a>
+	  </div>
+	</div>
+      </div>
+    </div>
+    <script type="text/javascript" language="JavaScript">
+	document.getElementsByTagName("body")[0].className = "bg";
+    </script>
+    <script type="text/javascript" language="JavaScript" src="res/scripts/swatch.js"></script>
   </body>
 </html>
-

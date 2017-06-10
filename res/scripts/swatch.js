@@ -266,7 +266,7 @@ function coolDown(t, f) {
 
 
 function flatSquaresBG(animationLength) {
-    var c = document.getElementById('bg');
+    var c = document.getElementById('bg-canvas');
     var ctx = c.getContext('2d');
 
     c.height = window.innerHeight;
