@@ -126,6 +126,14 @@ function topDownGradient(screenWidth, screenHeight) {
 }
 
 
+function leftRightGradient(screenWidth, screenHeight) {
+    return (i) => {
+	let xyPair = quotient(i, screenHeight);
+	return [ xyPair[1], xyPair[0] ];
+    };
+}
+
+
 /**
   * parameters:
   *   screenWidth - width of screen, in squares
@@ -222,7 +230,8 @@ function getRandGradient() {
     let gradients = [
 	topLeftToBottomRightGradient,
 	topRightToBottomLeftGradient,
-	topDownGradient
+	topDownGradient,
+	leftRightGradient
     ];
 
     let indx = randInt(0, gradients.length);
