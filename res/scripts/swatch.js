@@ -277,9 +277,9 @@ function flatSquaresBG(canvas, animationLength) {
     c.width  = window.innerWidth;
 
     let numSquaresWide = Math.floor(c.width / 100) + 4,
-	sqrWidth = Math.ceil(c.width / numSquaresWide + 1),
+	sqrWidth = Math.ceil(c.width / numSquaresWide),
 	numSquaresTall = Math.floor(c.height / sqrWidth),
-	sqrHeight = Math.ceil(sqrWidth + (c.height % sqrWidth) / numSquaresTall + 1),
+	sqrHeight = Math.ceil(sqrWidth + (c.height % sqrWidth) / numSquaresTall),
 	totalNumSquares = (Math.floor(c.height / sqrHeight) + 1) * numSquaresWide,
 	colorWheelSpread = .5,
 	startColorAngle = Math.random(),
