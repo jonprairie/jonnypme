@@ -6,6 +6,11 @@ function randInt(start=1, end=100) {
 }
 
 
+function randFloat(start=0, end=1) {
+    return (end - start) * Math.random() + start;
+}
+
+
 /**
   * parameters:
   *   numColors - number of colors to generate
@@ -271,15 +276,15 @@ function flatSquaresBG(canvas, animationLength) {
     c.height = window.innerHeight;
     c.width  = window.innerWidth;
 
-    let numSquaresWide = Math.floor((c.width > 800) ? c.width / 100 : c.width / 80),
+    let numSquaresWide = Math.floor(c.width / 100) + 4,
 	sqrWidth = Math.ceil(c.width / numSquaresWide + 1),
 	numSquaresTall = Math.floor(c.height / sqrWidth),
 	sqrHeight = Math.ceil(sqrWidth + (c.height % sqrWidth) / numSquaresTall + 1),
 	totalNumSquares = (Math.floor(c.height / sqrHeight) + 1) * numSquaresWide,
 	colorWheelSpread = .5,
 	startColorAngle = Math.random(),
-	saturation = () => randInt(3000, 5000) / 10000,
-	lightness = () => randInt(3000, 7000) / 10000,
+	saturation = () => randFloat(.3, .5),
+	lightness = () => randFloat(.3, .7),
 	colors = genHuesFromAngleSpread(totalNumSquares, colorWheelSpread, startColorAngle)
 	  .map(x => hslToRgb(x, saturation(), lightness()))
 	  .map(rgbArrayToHex);
@@ -297,15 +302,20 @@ function flatSquaresBG(canvas, animationLength) {
 
 
 var c = document.getElementById('bg-canvas');
+var animationLength = 500;
 
 
 window.onload = 
 c.onclick = 
 c.ontouch = 
 window.onresize = function () {
+    // make this function interruptable by saving the ids from setTimeout, then
+    // clearing the timeouts when this function is triggered again.
     let currentFuncs = [];
     return (e) => {
 	currentFuncs.forEach((id) => window.clearTimeout(id));
-	currentFuncs = flatSquaresBG(c, 500).map((f) => window.setTimeout(f, randInt(1, 500)));
+	currentFuncs = flatSquaresBG(c, animationLength).map(
+	    (f) => window.setTimeout(f, randInt(1, animationLength))
+	);
     };
 }();
