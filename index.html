@@ -4,8 +4,11 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Jonathan Prairie</title>
     <link rel="stylesheet" href="res/styles/main.css" />
+    <noscript>
+      <link rel="stylesheet" href="res/styles/noscript.css" />
+    </noscript>
   </head>
-  <body class="bg-image">
+  <body class="bg noscript-bg">
     <canvas id="bg-canvas"></canvas>
     <div class="v-center">
       <div class="h-center">
@@ -30,9 +33,6 @@
 	</div>
       </div>
     </div>
-    <script type="text/javascript" language="JavaScript">
-	document.getElementsByTagName("body")[0].className = "bg";
-    </script>
     <script type="text/javascript" language="JavaScript" src="res/scripts/swatch.js"></script>
   </body>
 </html>
