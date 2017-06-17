@@ -1,5 +1,21 @@
-.noscript-bg {
-    background-image: url('../images/bg.png');
-    background-size: 100% 100%;
+@media screen and (min-aspect-ratio: 3/2) {
+    .noscript-bg {
+	background-image: url('../images/bg.png');
+	background-size: 100% 100%;
+    }
+}
+
+@media screen and (max-aspect-ratio: 2/3) {
+    .noscript-bg {
+	background-image: url('../images/bg_tall.png');
+	background-size: 100% 100%;
+    }
+}
+
+@media screen and (max-aspect-ratio: 3/2) and (min-aspect-ratio: 2/3) {
+    .noscript-bg {
+	background-image: url('../images/bg_sqr.png');
+	background-size: 100% 100%;
+    }
 }
     
